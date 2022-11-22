@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AradaMart.WixIToCNETntegrator", "AradaMart.WixIToCNETntegrator.csproj", "{8A377136-AF0A-498B-9655-E20DD5C5446A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "..\WinFormsApp1\WinFormsApp1.csproj", "{A32A1AFC-82DD-4A17-ABFA-AED9A6DF01E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8A377136-AF0A-498B-9655-E20DD5C5446A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A377136-AF0A-498B-9655-E20DD5C5446A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A377136-AF0A-498B-9655-E20DD5C5446A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32A1AFC-82DD-4A17-ABFA-AED9A6DF01E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32A1AFC-82DD-4A17-ABFA-AED9A6DF01E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32A1AFC-82DD-4A17-ABFA-AED9A6DF01E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32A1AFC-82DD-4A17-ABFA-AED9A6DF01E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

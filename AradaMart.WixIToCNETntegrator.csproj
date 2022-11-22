@@ -58,6 +58,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Flurl, Version=3.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Flurl.3.0.6\lib\net472\Flurl.dll</HintPath>
+    </Reference>
     <Reference Include="JsonHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\JsonHelper.1.0.0\lib\netstandard2.0\JsonHelper.dll</HintPath>
     </Reference>

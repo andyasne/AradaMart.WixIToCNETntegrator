@@ -12,48 +12,71 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-
+using Flurl;
 namespace AradaMart.WixIToCNETntegrator
 {
     public class Program
     {
-        static void Main(string[] args)
+        private const string URL_access = "https://www.wixapis.com/oauth/access";
+        static string url = "http://localhost:13015/getAchaUser/";
+       
+        static void Main()
         {
-             string details = CallRestMethod("http://localhost:13015/getAchaUser/");
-            Console.WriteLine(details);
+            Program program = new Program();
+            program.AuthWix();
+
         }
 
-        public static string CallRestMethod(string url)
+        private string  AuthWix()
         {
-            HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
-            webrequest.Method = "GET";
-            webrequest.ContentType = "application/x-www-form-urlencoded";
-            webrequest.Headers.Add("Username", "xyz");
-            webrequest.Headers.Add("Password", "abc");
-            HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
-            Encoding enc = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader responseStream = new StreamReader(webresponse.GetResponseStream(), enc);
-            string result = string.Empty;
-            result = responseStream.ReadToEnd();
-            webresponse.Close();
-            return result;
-        }
-
-        public class LoginReply
-        {
-            public LoginReply()
+            LoginModel loginModel = new LoginModel
             {
-            }
+                grant_type = "authorization_code",
+                client_id = "0310e975-e3ea-4416-b6d9-cc4659079746",
+                client_secret = "de86e9f3-47b7-43f3-9e8f-6b072d0ff009",
+                code = "OAUTH2.eyJraWQiOiJWUTQwMVRlWiIsImFsZyI6IkhTMjU2In0.eyJkYXRhIjoie1wiYXBwSWRcIjpcIjAzMTBlOTc1LWUzZWEtNDQxNi1iNmQ5LWNjNDY1OTA3OTc0NlwiLFwiaW5zdGFuY2VJZFwiOlwiNjIzN2M2MzUtOTEwMC00NjZkLTk3ZTQtMDQ2NzI4N2E1NWY2XCIsXCJzY29wZVwiOltcIlNDT1BFLkRDLVNUT1JFUy1NRUdBLk1BTkFHRS1TVE9SRVNcIixcIlNDT1BFLkRDLk1BTkFHRS1ZT1VSLUFQUFwiLFwiU0NPUEUuREMtU1RPUkVTLk1BTkFHRS1QUk9EVUNUU1wiLFwiU0NPUEUuREMtU1RPUkVTLlJFQUQtT1JERVJTXCIsXCJTQ09QRS5EQy1TVE9SRVMtTUVHQS5SRUFELVNUT1JFU1wiLFwiU0NPUEUuREMtU1RPUkVTLlJFQUQtUFJPRFVDVFNcIixcIlNDT1BFLkRDLVNUT1JFUy5NQU5BR0UtT1JERVJTXCJdfSIsImlhdCI6MTY2OTE0NzE4MywiZXhwIjoxNjY5MTQ3NzgzfQ.70ywfiSsD27ciZXOOMf_tA8CCJkaY8V3ZZzE-RJ1S-M"
+            };
 
-            public LoginReply(string refresh_token, string access_token)
-            {
-                this.refresh_token = refresh_token;
-                this.access_token = access_token;
-            }
+            var client = new RestClient();
+            var request = new RestRequest(URL_access, Method.Post);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", loginModel, ParameterType.RequestBody);
+            var response = client.Execute(request);
 
-            public string refresh_token { get; set; }
-            public string access_token { get; set; }
+            LoginReply loginReply = System.Text.Json.JsonSerializer.Deserialize<LoginReply>(response.Content);
+
+            return response.Content;
+
         }
 
+    }
+
+    public class LoginModel
+    {
+
+        public LoginModel()
+        {
+        }
+
+        public string grant_type { get; internal set; }
+        public string client_secret { get; internal set; }
+        public string client_id { get; internal set; }
+        public string code { get; internal set; }
+    }
+
+    public class LoginReply
+    {
+        public LoginReply()
+        {
+        }
+
+        public LoginReply(string refresh_token, string access_token)
+        {
+            this.refresh_token = refresh_token;
+            this.access_token = access_token;
+        }
+
+        public string refresh_token { get; set; }
+        public string access_token { get; set; }
     }
 }
